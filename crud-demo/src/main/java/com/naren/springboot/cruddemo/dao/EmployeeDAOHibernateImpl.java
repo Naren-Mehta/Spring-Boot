@@ -40,7 +40,7 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
 	@Override
 	public void save(Employee emp) {
 		Session session = entityManager.unwrap(Session.class);
-		session.save(emp);
+		session.saveOrUpdate(emp);
 	}
 
 	@Override
