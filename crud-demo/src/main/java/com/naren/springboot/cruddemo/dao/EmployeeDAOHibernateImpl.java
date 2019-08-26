@@ -16,20 +16,40 @@ import com.naren.springboot.cruddemo.entity.Employee;
 public class EmployeeDAOHibernateImpl implements EmployeeDAO {
 
 	private EntityManager entityManager;
-	
+
 	@Autowired
 	public EmployeeDAOHibernateImpl(EntityManager theEntityManager) {
 		this.entityManager = theEntityManager;
 	}
 
+	@Override
+	public List<Employee> findAll() {
+		Session session = entityManager.unwrap(Session.class);
+		Query<Employee> query = session.createQuery("from Employee ", Employee.class);
+		List<Employee> employeeList = query.getResultList();
+		return employeeList;
+	}
 
 	@Override
-	@Transactional
-	public List<Employee> findAll() {
-		Session session= entityManager.unwrap(Session.class);
-		Query<Employee> query = session.createQuery("from Employee " , Employee.class);
-		List<Employee> employeeList= query.getResultList();
-		return employeeList;
+	public Employee findById(int id) {
+		Session session = entityManager.unwrap(Session.class);
+		Employee employee = session.get(Employee.class, id);
+		return employee;
+	}
+
+	@Override
+	public void save(Employee emp) {
+		Session session = entityManager.unwrap(Session.class);
+		session.save(emp);
+	}
+
+	@Override
+	public void deleteById(int id) {
+		Employee employee=findById(id);
+		Session session = entityManager.unwrap(Session.class);
+		Query query= session.createQuery("delete from Employee where id=:empId");
+		query.setParameter("empId", id);
+		query.executeUpdate();
 	}
 
 }
