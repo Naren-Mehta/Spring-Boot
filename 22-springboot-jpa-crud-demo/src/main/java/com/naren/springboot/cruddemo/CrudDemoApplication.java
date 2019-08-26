@@ -1,13 +1,13 @@
-package com.naren.springboot.demo.mycoolapp;
+package com.naren.springboot.cruddemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MycoolappApplication {
+public class CrudDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MycoolappApplication.class, args);
+		SpringApplication.run(CrudDemoApplication.class, args);
 	}
 
 }
