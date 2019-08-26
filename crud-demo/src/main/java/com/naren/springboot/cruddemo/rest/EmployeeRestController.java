@@ -42,7 +42,7 @@ public class EmployeeRestController {
 		return employee;
 	}
 	
-	@DeleteMapping("/employee/{employeeId}")
+	@DeleteMapping("/employees/{employeeId}")
 	public String deleteById(@PathVariable Integer employeeId) {
 		employeeService.deleteById(employeeId);
 		return "Employee Deleted with id: "+employeeId;
